@@ -22,11 +22,15 @@ public class QuickSettingsTileService extends TileService {
 
     private void setActiveLabelText(String text) {
         if (getSharedPreferences("preferences", Context.MODE_PRIVATE).getBoolean("infoInTitle", false)) {
-            getQsTile().setLabel(text);
-            getQsTile().setSubtitle(getString(R.string.battery_tile_label));
+            if (getQsTile() != null) {
+                getQsTile().setLabel(text);
+                getQsTile().setSubtitle(getString(R.string.battery_tile_label));
+            }
         }
         else {
-            getQsTile().setSubtitle(text);
+            if (getQsTile() != null) {
+                getQsTile().setSubtitle(text);
+            }
         }
     }
 
@@ -39,11 +43,11 @@ public class QuickSettingsTileService extends TileService {
         final boolean isFullyCharged = isPluggedIn && batteryState == BatteryManager.BATTERY_STATUS_FULL;
         isCharging = batteryState == BatteryManager.BATTERY_STATUS_CHARGING;
 
-        if (isTappableTileEnabled) {
+        if (isTappableTileEnabled && getQsTile() != null) {
             getQsTile().setState(isCharging ? Tile.STATE_INACTIVE : (getSystemService(PowerManager.class).isPowerSaveMode() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE));
         }
 
-        if (isPluggedIn && getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("dynamic_tile_icon", true)) {
+        if (isPluggedIn && getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("dynamic_tile_icon", true) && getQsTile() != null) {
             switch (plugState) {
                 case BatteryManager.BATTERY_PLUGGED_AC -> getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_power));
                 case BatteryManager.BATTERY_PLUGGED_USB -> getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_usb));
@@ -55,11 +59,11 @@ public class QuickSettingsTileService extends TileService {
         if (isFullyCharged) {
             final String customTileText = getSharedPreferences("preferences", MODE_PRIVATE).getString("charging_text", "");
             setActiveLabelText(customTileText.isEmpty() ? getString(R.string.fully_charged) : new TileTextFormatter(this).format(customTileText));
-            if (!isTappableTileEnabled) getQsTile().setState(getTileState(true));
+            if (!isTappableTileEnabled && getQsTile() != null) getQsTile().setState(getTileState(true));
         }
         else if (isCharging) {
             final String customTileText = getSharedPreferences("preferences", MODE_PRIVATE).getString("charging_text", "");
-            if (!isTappableTileEnabled) getQsTile().setState(getTileState(true));
+            if (!isTappableTileEnabled && getQsTile() != null) getQsTile().setState(getTileState(true));
 
             if (!customTileText.isEmpty()) {
                 setActiveLabelText(new TileTextFormatter(this).format(customTileText));
@@ -67,12 +71,10 @@ public class QuickSettingsTileService extends TileService {
             else {
                 final long remainingTime = getSystemService(BatteryManager.class).computeChargeTimeRemaining();
 
-                // computeChargeTimeRemaining() returns 0 at times for some reason, so check for < 1, not -1
                 if (remainingTime < 1) {
                     setActiveLabelText(getString(R.string.charging_no_time_estimate, batteryLevel));
                 }
                 else if (remainingTime <= 60000) {
-                    // case for when less than 1m is remaining - duration returns 0 minutes if less than 1m which is undesirable
                     setActiveLabelText(getString(R.string.charging_less_than_one_hour_left, batteryLevel, 1));
                 }
                 else {
@@ -92,27 +94,30 @@ public class QuickSettingsTileService extends TileService {
         else {
             final String customTileText = getSharedPreferences("preferences", MODE_PRIVATE).getString("discharging_text", "");
             setActiveLabelText(customTileText.isEmpty() ? batteryLevel + "%" : new TileTextFormatter(this).format(customTileText));
-            if (!isTappableTileEnabled) getQsTile().setState(getTileState(false));
-            getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_qs_battery));
+            if (!isTappableTileEnabled && getQsTile() != null) getQsTile().setState(getTileState(false));
+            if (getQsTile() != null) getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_qs_battery));
         }
 
-        getQsTile().updateTile();
+        if (getQsTile() != null) getQsTile().updateTile();
     }
 
     private void setPowerSaveInfo() {
-        final boolean shouldEmulatePowerSaveTile = getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("emulatePowerSaveTile", false);
+        shouldEmulatePowerSaveTile = getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("emulatePowerSaveTile", false);
 
         if (getSystemService(PowerManager.class).isPowerSaveMode()) {
-            getQsTile().setState(Tile.STATE_ACTIVE);
-            if (shouldEmulatePowerSaveTile) getQsTile().setSubtitle(getString(R.string.power_saver_tile_on_subtitle));
+            if (getQsTile() != null) getQsTile().setState(Tile.STATE_ACTIVE);
+            if (shouldEmulatePowerSaveTile && getQsTile() != null) getQsTile().setSubtitle(getString(R.string.power_saver_tile_on_subtitle));
         }
         else {
-            getQsTile().setState(Tile.STATE_INACTIVE);
-            if (shouldEmulatePowerSaveTile) getQsTile().setSubtitle(getString(R.string.power_saver_tile_off_subtitle));
+            if (getQsTile() != null) getQsTile().setState(Tile.STATE_INACTIVE);
+            if (shouldEmulatePowerSaveTile && getQsTile() != null) getQsTile().setSubtitle(getString(R.string.power_saver_tile_off_subtitle));
         }
 
-        getQsTile().updateTile();
+        if (getQsTile() != null) getQsTile().updateTile();
     }
+
+    private boolean batteryStateReceiverRegistered = false;
+    private boolean powerSaveModeReceiverRegistered = false;
 
     BroadcastReceiver batteryStateReceiver = new BroadcastReceiver() {
         @Override
@@ -134,40 +139,52 @@ public class QuickSettingsTileService extends TileService {
         isTappableTileEnabled = getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("tappableTileEnabled", false);
 
         final Intent batteryChangedIntent = registerReceiver(batteryStateReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        batteryStateReceiverRegistered = true;
 
-        assert batteryChangedIntent != null;
-        final int status = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+        if (batteryChangedIntent != null) {
+            final int status = batteryChangedIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+        }
 
         if (shouldEmulatePowerSaveTile) {
-            unregisterReceiver(batteryStateReceiver);
+            if (batteryStateReceiverRegistered) {
+                try { unregisterReceiver(batteryStateReceiver); } catch (IllegalArgumentException ignored) {}
+                batteryStateReceiverRegistered = false;
+            }
             registerReceiver(powerSaveModeReceiver, new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
-            getQsTile().setLabel(getString(R.string.power_save_tile_label));
-            getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_battery_saver));
+            powerSaveModeReceiverRegistered = true;
+            if (getQsTile() != null) {
+                getQsTile().setLabel(getString(R.string.power_save_tile_label));
+                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_battery_saver));
+            }
 
             if (isCharging) {
-                getQsTile().setState(Tile.STATE_UNAVAILABLE);
-                getQsTile().setSubtitle(getString(R.string.power_save_tile_unavailable_subtitle));
-                getQsTile().updateTile();
+                if (getQsTile() != null) {
+                    getQsTile().setState(Tile.STATE_UNAVAILABLE);
+                    getQsTile().setSubtitle(getString(R.string.power_save_tile_unavailable_subtitle));
+                    getQsTile().updateTile();
+                }
             }
             else {
                 setPowerSaveInfo();
             }
         }
         else {
-            getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_qs_battery));
-            getQsTile().setLabel(getString(R.string.battery_tile_label));
+            if (getQsTile() != null) {
+                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_qs_battery));
+                getQsTile().setLabel(getString(R.string.battery_tile_label));
+            }
 
-            if (!isTappableTileEnabled) {
+            if (!isTappableTileEnabled && getQsTile() != null) {
                 getQsTile().setState(getTileState(isCharging));
             }
             else {
-                final IntentFilter powerSaveChangedFilter = new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED);
-                registerReceiver(powerSaveModeReceiver, powerSaveChangedFilter);
+                registerReceiver(powerSaveModeReceiver, new IntentFilter(PowerManager.ACTION_POWER_SAVE_MODE_CHANGED));
+                powerSaveModeReceiverRegistered = true;
                 setPowerSaveInfo();
             }
 
-            setBatteryInfo(batteryChangedIntent);
+            if (batteryChangedIntent != null) setBatteryInfo(batteryChangedIntent);
         }
     }
 
@@ -187,17 +204,25 @@ public class QuickSettingsTileService extends TileService {
         final boolean isInPowerSaveMode = getSystemService(PowerManager.class).isPowerSaveMode();
 
         Settings.Global.putInt(getContentResolver(), "low_power", isInPowerSaveMode ? 0 : 1);
-        getQsTile().setState(isInPowerSaveMode ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
-        getQsTile().updateTile();
+        if (getQsTile() != null) {
+            getQsTile().setState(isInPowerSaveMode ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+            getQsTile().updateTile();
+        }
     }
 
     @Override
     public void onStopListening() {
-        if (isTappableTileEnabled) {
-            unregisterReceiver(powerSaveModeReceiver);
-        }
-        if (!shouldEmulatePowerSaveTile) {
-            unregisterReceiver(batteryStateReceiver);
-        }
+        try {
+            if (powerSaveModeReceiverRegistered) {
+                unregisterReceiver(powerSaveModeReceiver);
+                powerSaveModeReceiverRegistered = false;
+            }
+        } catch (IllegalArgumentException ignored) {}
+        try {
+            if (batteryStateReceiverRegistered) {
+                unregisterReceiver(batteryStateReceiver);
+                batteryStateReceiverRegistered = false;
+            }
+        } catch (IllegalArgumentException ignored) {}
     }
 }

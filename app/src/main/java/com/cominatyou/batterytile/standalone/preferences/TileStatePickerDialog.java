@@ -1,11 +1,11 @@
-package com.cominatyou.batterytile.preferences;
+package com.cominatyou.batterytile.standalone.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.widget.TextView;
 
-import com.cominatyou.batterytile.R;
+import com.cominatyou.batterytile.standalone.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class TileStatePickerDialog {

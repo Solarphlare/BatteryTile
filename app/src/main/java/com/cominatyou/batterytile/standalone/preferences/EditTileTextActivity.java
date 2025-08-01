@@ -1,4 +1,4 @@
-package com.cominatyou.batterytile.preferences;
+package com.cominatyou.batterytile.standalone.preferences;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
 
-import com.cominatyou.batterytile.R;
-import com.cominatyou.batterytile.databinding.ActivityEditTileTextBinding;
+import com.cominatyou.batterytile.standalone.R;
+import com.cominatyou.batterytile.standalone.databinding.ActivityEditTileTextBinding;
 import com.google.android.material.color.DynamicColors;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 

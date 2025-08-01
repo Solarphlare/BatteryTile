@@ -1,4 +1,4 @@
-package com.cominatyou.batterytile;
+package com.cominatyou.batterytile.standalone;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.provider.Settings;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 
-import com.cominatyou.batterytile.preferences.TileTextFormatter;
+import com.cominatyou.batterytile.standalone.preferences.TileTextFormatter;
 
 import java.time.Duration;
 

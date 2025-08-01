@@ -6,7 +6,7 @@ android {
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.cominatyou.batterytile"
+        applicationId "com.cominatyou.batterytile.standalone"
         minSdk 29
         targetSdk 36
         versionCode 15
@@ -29,7 +29,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    namespace 'com.cominatyou.batterytile'
+    namespace 'com.cominatyou.batterytile.standalone'
 }
 
 dependencies {

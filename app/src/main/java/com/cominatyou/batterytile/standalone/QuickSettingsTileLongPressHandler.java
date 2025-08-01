@@ -1,4 +1,4 @@
-package com.cominatyou.batterytile;
+package com.cominatyou.batterytile.standalone;
 
 import android.app.Activity;
 import android.content.Intent;

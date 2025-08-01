@@ -1,4 +1,4 @@
-package com.cominatyou.batterytile.preferences;
+package com.cominatyou.batterytile.standalone.preferences;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 
 import android.Manifest;
 
-import com.cominatyou.batterytile.R;
-import com.cominatyou.batterytile.databinding.BottomSheetPreferencesBinding;
+import com.cominatyou.batterytile.standalone.R;
+import com.cominatyou.batterytile.standalone.databinding.BottomSheetPreferencesBinding;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 

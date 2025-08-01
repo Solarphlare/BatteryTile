@@ -1,10 +1,10 @@
-package com.cominatyou.batterytile.preferences;
+package com.cominatyou.batterytile.standalone.preferences;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cominatyou.batterytile.R;
+import com.cominatyou.batterytile.standalone.R;
 import com.google.android.material.color.DynamicColors;
 
 public class PreferencesActivity extends AppCompatActivity {

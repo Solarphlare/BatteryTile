@@ -1,12 +1,11 @@
 package com.cominatyou.batterytile.preferences;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.Toast;
-import android.window.OnBackInvokedDispatcher;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,9 +28,12 @@ public class EditTileTextActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            getOnBackInvokedDispatcher().registerOnBackInvokedCallback(OnBackInvokedDispatcher.PRIORITY_DEFAULT, this::warnForUnsavedChanges);
-        }
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                warnForUnsavedChanges();
+            }
+        });
 
         final boolean isEditingChargingText = getIntent().getBooleanExtra("isEditingChargingText", false);
         final String preference_key = isEditingChargingText ? "charging_text" : "discharging_text";
@@ -63,17 +65,6 @@ public class EditTileTextActivity extends AppCompatActivity {
         });
 
         binding.topBar.setNavigationOnClickListener(v -> warnForUnsavedChanges());
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void onBackPressed() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-            warnForUnsavedChanges();
-        }
-        else {
-            super.onBackPressed();
-        }
     }
 
     private void warnForUnsavedChanges() {

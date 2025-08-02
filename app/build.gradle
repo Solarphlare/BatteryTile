@@ -18,6 +18,10 @@ android {
 
     buildFeatures.viewBinding true
 
+    dependenciesInfo {
+        includeInApk = false
+    }
+
     buildTypes {
         release {
             minifyEnabled true

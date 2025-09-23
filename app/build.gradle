@@ -3,20 +3,23 @@ plugins {
 }
 
 android {
-    compileSdk 36
+    compileSdk = 36
 
     defaultConfig {
         applicationId "com.cominatyou.batterytile.standalone"
         minSdk 29
         targetSdk 36
         versionCode 16
-        versionName "1.8.1"
+        versionName "1.8.2"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures.viewBinding true
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
+    }
 
     dependenciesInfo {
         includeInApk = false

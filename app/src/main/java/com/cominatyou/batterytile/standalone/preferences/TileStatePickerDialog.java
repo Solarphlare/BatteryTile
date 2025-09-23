@@ -14,7 +14,6 @@ public class TileStatePickerDialog {
         final SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
 
         TextView title = new TextView(context);
-        // You Can Customise your Title here
         title.setText(R.string.dialog_tile_state_picker_title);
         title.setGravity(Gravity.CENTER);
         title.setPadding(60, 60, 60, 10);

@@ -15,6 +15,7 @@ import android.Manifest;
 
 import com.cominatyou.batterytile.standalone.R;
 import com.cominatyou.batterytile.standalone.databinding.BottomSheetPreferencesBinding;
+import com.cominatyou.batterytile.standalone.debug.DebugDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -36,6 +37,11 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = BottomSheetPreferencesBinding.inflate(inflater, container, false);
         final SharedPreferences preferences = requireContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+
+        binding.preferencesBottomSheetTitle.setOnLongClickListener(l -> {
+            DebugDialog.show(requireContext());
+            return true;
+        });
 
         binding.tappableTileLayout.setOnClickListener(self -> binding.tappableTileSwitch.toggle());
 

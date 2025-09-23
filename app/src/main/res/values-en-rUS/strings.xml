@@ -61,4 +61,9 @@
     <string name="bottom_sheet_preferences_dynamic_tile_icon_description">Display the power source in the tile icon when charging</string>
     <string name="requires_adb_dialog_copy_success">ADB command copied!</string>
     <string name="requires_adb_dialog_copy_button">Copy ADB command</string>
+    <string name="debug_dialog_title">"Collecting Debug Info"</string>
+    <string name="debug_dialog_initial_description">This won\'t take very long.</string>
+    <string name="debug_dialog_collecting_info_description">Collecting battery info… (pass %1$d)</string>
+    <string name="debug_dialog_connect_to_power_description">Please connect your device to power to continue.</string>
+    <string name="debug_dialog_disconnect_from_power_description">Please disconnect your device from power to continue.</string>
 </resources>

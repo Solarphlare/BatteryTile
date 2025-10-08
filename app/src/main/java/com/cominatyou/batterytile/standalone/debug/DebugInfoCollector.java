@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutorService;
 
 public class DebugInfoCollector {
     @SuppressLint({"DefaultLocale"})
-    protected static void collectDebugInfo(final Context context, final AlertDialog dialog, final ExecutorService executorService) {
+    protected void collectDebugInfo(final Context context, final AlertDialog dialog, final ExecutorService executorService) {
         final StringBuilder debugInfo = new StringBuilder();
 
         appendStaticInfo(context, debugInfo);

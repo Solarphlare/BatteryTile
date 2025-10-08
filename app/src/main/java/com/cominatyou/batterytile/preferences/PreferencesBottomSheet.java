@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import com.cominatyou.batterytile.R;
 import com.cominatyou.batterytile.databinding.BottomSheetPreferencesBinding;
+import com.cominatyou.batterytile.debug.DebugDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class PreferencesBottomSheet extends BottomSheetDialogFragment {
@@ -36,6 +37,11 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
         updateTileStateDescription();
 
         binding.tileTextLayout.setOnClickListener(v -> TileTextDisambiguationDialog.show(requireContext()));
+
+        binding.preferencesBottomSheetTitle.setOnLongClickListener(l -> {
+            DebugDialog.show(requireContext());
+            return true;
+        });
 
         return binding.getRoot();
     }

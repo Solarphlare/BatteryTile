@@ -13,7 +13,6 @@ public class TileTextDisambiguationDialog {
         int[] choice = { 0 };
 
         TextView title = new TextView(context);
-        // You Can Customise your Title here
         title.setText(R.string.dialog_tile_text_disambiguation_title);
         title.setGravity(Gravity.CENTER);
         title.setPadding(60, 60, 60, 10);

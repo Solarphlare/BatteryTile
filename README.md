@@ -18,7 +18,7 @@ This app is compatible with API 29+ devices (Android 10 or higher), as Quick Set
 
 Theoretically, compatibility could be extended to cover API 24+ as well (Android 7 and up) if references to
 [Tile#setSubtitle](https://developer.android.com/reference/android/service/quicksettings/Tile#setSubtitle(java.lang.CharSequence))
-were removed. However, this would defeat one of the purposes of the tile, but the option to do so is available to anyone who wishes to compile it themselves.
+were removed. However, this would defeat one of the purposes of the tile, but the option to do so is available to anyone who wishes to compile it on their own.
 
 ## Download
 The latest version can be downloaded from [releases page](https://github.com/CominAtYou/BatteryTile/releases/latest).

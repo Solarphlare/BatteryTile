@@ -1,0 +1,59 @@
+name: Bug Report
+description: File a bug report.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Describe the issue
+      description: Please go into depth and describe exactly what's not working right.
+    validations:
+      required: true
+  - type: textarea
+    id: issue-expected
+    attributes:
+      label: What's the expected behaviour?
+      description: If this bug didn't exist, what would the correct behaviour be?
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Debug logs
+      description: Please include debug logs from the app so we can further diagnose the issue. You can access them by opening settings and holding down on the "Settings" text at the top.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: What version of the app are you running?
+      placeholder: e.g., 1.9.0
+    validations:
+      required: true
+  - type: checkboxes
+    id: version-validation
+    attributes:
+      label: Are you running the latest version of the app?
+      description: Before submitting your report, make sure your issue occurs on the latest version of the app, which can be found [here](https://github.com/Solarphlare/BatteryTile/releases/latest).
+      options:
+        - label: I am running the latest version of Battery Tile.
+          required: true
+  - type: input
+    id: android-version
+    attributes:
+      label: Android version
+      description: What version of the Android are you running?
+      placeholder: e.g., Android 16
+    validations:
+      required: true
+  - type: input
+    id: device-name
+    attributes:
+      label: Device model
+      description: What device are you using? Make sure to include the manufactuer name and model name.
+      placeholder: e.g., Samsung Galaxy S22 Ultra
+    validations:
+      required: true
+
+

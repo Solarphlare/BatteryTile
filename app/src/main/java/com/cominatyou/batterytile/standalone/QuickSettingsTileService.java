@@ -1,5 +1,6 @@
 package com.cominatyou.batterytile.standalone;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -43,7 +44,11 @@ public class QuickSettingsTileService extends TileService {
             getQsTile().setState(isCharging ? Tile.STATE_INACTIVE : (getSystemService(PowerManager.class).isPowerSaveMode() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE));
         }
 
-        if (isPluggedIn && getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("dynamic_tile_icon", true)) {
+        if (getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("percentage_as_icon", false)) {
+            @SuppressLint("DiscouragedApi") final int iconId = getResources().getIdentifier("ic_tile_percent_" + batteryLevel, "drawable", getPackageName());
+            getQsTile().setIcon(Icon.createWithResource(this, iconId == 0 ? R.drawable.ic_qs_battery : iconId));
+        }
+        else if (isPluggedIn && getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("dynamic_tile_icon", true)) {
             switch (plugState) {
                 case BatteryManager.BATTERY_PLUGGED_AC -> getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_power));
                 case BatteryManager.BATTERY_PLUGGED_USB -> getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_usb));
@@ -93,7 +98,14 @@ public class QuickSettingsTileService extends TileService {
             final String customTileText = getSharedPreferences("preferences", MODE_PRIVATE).getString("discharging_text", "");
             setActiveLabelText(customTileText.isEmpty() ? batteryLevel + "%" : new TileTextFormatter(this).format(customTileText));
             if (!isTappableTileEnabled) getQsTile().setState(getTileState(false));
-            getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_qs_battery));
+
+            if (getSharedPreferences("preferences", MODE_PRIVATE).getBoolean("percentage_as_icon", false)) {
+                @SuppressLint("DiscouragedApi") final int iconId = getResources().getIdentifier("ic_tile_percent_" + batteryLevel, "drawable", getPackageName());
+                getQsTile().setIcon(Icon.createWithResource(this, iconId == 0 ? R.drawable.ic_qs_battery : iconId));
+            }
+            else {
+                getQsTile().setIcon(Icon.createWithResource(this, R.drawable.ic_qs_battery));
+            }
         }
 
         getQsTile().updateTile();

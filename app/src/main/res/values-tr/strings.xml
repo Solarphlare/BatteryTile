@@ -60,6 +60,9 @@
     <string name="menu_edit_title_save_button">Kaydet</string>
     <string name="bottom_sheet_preferences_dynamic_tile_icon_title">Dinamik kutucuk simgesi</string>
     <string name="bottom_sheet_preferences_dynamic_tile_icon_description">Şarj ederken kutucuk simgesinde güç kaynağını görüntüle</string>
+    <!--  These need to be translated. Any help would be appreciated!  -->
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_title">Battery percentage as tile icon</string>
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_description">Display the current battery percentage as the tile icon</string>
     <string name="requires_adb_dialog_copy_success">ADB komutu kopyalandı!</string>
     <string name="requires_adb_dialog_copy_button">ADB komutunu kopyala</string>
     <!--  These need to be translated. Any help would be appreciated!  -->

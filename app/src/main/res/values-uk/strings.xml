@@ -56,6 +56,9 @@
     <string name="menu_edit_title_save_button">Зберегти</string>
     <string name="bottom_sheet_preferences_dynamic_tile_icon_title">Динамічна іконка плитки</string>
     <string name="bottom_sheet_preferences_dynamic_tile_icon_description">Відображати на плитці джерело живлення під час заряджання</string>
+    <!--  These need to be translated. Any help would be appreciated!  -->
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_title">Battery percentage as tile icon</string>
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_description">Display the current battery percentage as the tile icon</string>
     <string name="requires_adb_dialog_copy_success">ADB команду скопійовано!</string>
     <string name="requires_adb_dialog_copy_button">Копіювати ADB команду</string>
     <!--  These need to be translated. Any help would be appreciated!  -->

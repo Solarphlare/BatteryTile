@@ -41,12 +41,20 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-    <style name="ThemeOverlay.App.ToolbarText" parent="Widget.Material3.Toolbar">
+    <style name="MaterialToolbar.BatteryTile" parent="Widget.Material3.Toolbar">
         <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/gs_flex</item>
     </style>
 
     <style name="TextAppearance.App.TitleLarge" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
         <item name="android:textSize">38sp</item>
     </style>
 
+    <style name="SingleSelectDialogTheme" parent="MaterialAlertDialog.Material3">
+        <item name="android:checkedTextViewStyle">@style/CheckedTextViewStyle</item>
+    </style>
+
+    <style name="CheckedTextViewStyle" parent="Widget.Material3.CheckedTextView">
+        <item name="android:fontFamily">@font/gs_flex</item>
+    </style>
 </resources>

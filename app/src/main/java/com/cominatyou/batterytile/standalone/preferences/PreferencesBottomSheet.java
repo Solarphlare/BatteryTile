@@ -1,5 +1,6 @@
 package com.cominatyou.batterytile.standalone.preferences;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -10,14 +11,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.Manifest;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.cominatyou.batterytile.standalone.R;
 import com.cominatyou.batterytile.standalone.databinding.BottomSheetPreferencesBinding;
 import com.cominatyou.batterytile.standalone.debug.DebugDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 public class PreferencesBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetPreferencesBinding binding;
@@ -52,11 +59,17 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
             }
             else {
                 if (state && showDialog) {
-                    new MaterialAlertDialogBuilder(requireContext())
+                    final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
                             .setTitle(R.string.power_save_tile_warning_title)
                             .setMessage(R.string.power_save_system_warning_description)
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())
-                            .show();
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
+
+                    final AlertDialog dialog = builder.show();
+
+                    ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(requireContext(), R.font.gs_flex));
+                    @SuppressLint("DiscouragedApi") int resId = getResources().getIdentifier("alertTitle", "id", requireContext().getPackageName());
+                    ((TextView) Objects.requireNonNull(dialog.findViewById(resId))).setTypeface(ResourcesCompat.getFont(requireContext(), R.font.gs_flex));
+                    ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(requireContext(), R.font.gs_flex));
                 }
                 preferences
                         .edit()

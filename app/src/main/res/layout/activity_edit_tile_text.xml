@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             app:menu="@menu/menu_edit_tile_text"
             android:layout_height="?attr/actionBarSize"
+            app:titleTextAppearance="@style/MaterialToolbar.BatteryTile"
             app:title="@string/activity_edit_tile_text_title"
             app:navigationIcon="@drawable/ic_arrow_back"
             android:background="?attr/colorSurfaceContainer"/>
@@ -48,6 +49,7 @@
                         android:layout_width="match_parent"
                         android:imeOptions="actionDone"
                         android:inputType="textNoSuggestions"
+                        android:fontFamily="@font/gs_flex"
                         android:scrollHorizontally="true"
                         android:layout_height="match_parent" />
 
@@ -67,6 +69,7 @@
                 android:id="@+id/info_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/gs_flex"
                 android:layout_marginTop="12dp"
                 android:textColor="?android:attr/textColorSecondary"
                 app:layout_constraintStart_toStartOf="parent"

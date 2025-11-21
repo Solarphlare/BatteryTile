@@ -21,6 +21,7 @@ public class TileTextDisambiguationDialog {
         TextView title = new TextView(context);
         title.setText(R.string.dialog_tile_text_disambiguation_title);
         title.setGravity(Gravity.CENTER);
+        title.setTextColor(com.google.android.material.R.attr.colorOnSurface);
         title.setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex));
         title.setPadding(60, 60, 60, 10);
         title.setTextSize(24);
@@ -35,7 +36,7 @@ public class TileTextDisambiguationDialog {
                 .setCustomTitle(title);
 
         final AlertDialog dialog = builder.show();
-        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex));
-        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex));
+        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex_medium));
+        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex_medium));
     }
 }

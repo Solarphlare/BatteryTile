@@ -1,14 +1,19 @@
 package com.cominatyou.batterytile.standalone.preferences;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.WindowCompat;
 
 import com.cominatyou.batterytile.standalone.R;
@@ -69,12 +74,19 @@ public class EditTileTextActivity extends AppCompatActivity {
 
     private void warnForUnsavedChanges() {
         if (hasTextBeenChanged) {
-            new MaterialAlertDialogBuilder(this)
+            final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this)
                     .setTitle(R.string.activity_edit_text_discard_dialog_title)
                     .setMessage(R.string.activity_edit_text_discard_dialog_description)
                     .setNegativeButton(R.string.activity_edit_text_discard_dialog_negative_button, (dialog, which) -> finish())
-                    .setPositiveButton(R.string.activity_edit_text_discard_dialog_positive_button, (dialog, which) -> dialog.dismiss())
-                    .show();
+                    .setPositiveButton(R.string.activity_edit_text_discard_dialog_positive_button, (dialog, which) -> dialog.dismiss());
+
+            final AlertDialog dialog = builder.show();
+            ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex));
+            @SuppressLint("DiscouragedApi") int resId = getResources().getIdentifier("alertTitle", "id", getPackageName());
+            ((TextView) Objects.requireNonNull(dialog.findViewById(resId))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex));
+            ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex_medium));
+            ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex_medium));
+
         }
         else {
             finish();

@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- nested scroll view to allow scrolling in bottom sheet -->
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="?attr/colorSurfaceContainer">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        app:layout_behavior="@string/bottom_sheet_behavior"
+        android:paddingHorizontal="16dp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
 
-        tools:background="?attr/colorSurface">
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/CircularImageView"
+            android:elevation="2dp"
+            android:visibility="gone"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/app_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/gs_flex"
+            android:textAllCaps="true"
+            android:textSize="11sp"
+            android:letterSpacing="0.2"
+            android:layout_marginStart="8dp"
+            android:id="@+id/bottom_sheet_preferences_accent_title"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gs_flex"
-            android:textFontWeight="500"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="24dp"
+            android:fontFamily="@font/gs_flex_medium"
+            android:typeface="normal"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_preferences_accent_title"
+            app:layout_constraintStart_toStartOf="@id/bottom_sheet_preferences_accent_title"
             android:text="@string/preferences_bottom_sheet_title"
             android:textSize="28sp"
+            android:layout_marginTop="-2dp"
             android:id="@+id/preferences_bottom_sheet_title"
             android:textColor="?android:textColorPrimary" />
 
@@ -33,21 +59,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/preferences_bottom_sheet_title"
-            android:layout_marginTop="12dp"
-            android:paddingVertical="16dp"
+            android:layout_marginTop="20dp"
+            android:paddingVertical="14dp"
             android:id="@+id/emulate_power_save_tile_preference_layout"
-            android:background="?attr/selectableItemBackground">
+            android:background="@drawable/list_item_background_top"
+            android:foreground="?attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/emulate_power_save_tile_preference_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="24dp"
-                android:fontFamily="@font/gs_flex"
+                android:fontFamily="@font/gs_flex_medium"
                 android:text="@string/emulate_power_save_tile_preference_title"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/emulate_power_save_tile_preference_switch"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/emulate_power_save_tile_preference_switch"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -82,20 +109,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:clickable="true"
             app:layout_constraintTop_toBottomOf="@id/emulate_power_save_tile_preference_layout"
-            android:paddingVertical="16dp"
+            android:paddingVertical="14dp"
+            android:layout_marginTop="2dp"
             android:id="@+id/tappable_tile_layout"
-            android:background="?attr/selectableItemBackground">
+            android:background="@drawable/list_item_background_middle"
+            android:foreground="?attr/selectableItemBackground">
 
             <TextView
                 android:id="@+id/tappable_tile_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="24dp"
-                android:fontFamily="@font/gs_flex"
+                android:fontFamily="@font/gs_flex_medium"
                 android:text="@string/enable_tap_action_preference_title"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/tappable_tile_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -116,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tappable_tile_switch"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -128,21 +157,23 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tappable_tile_layout"
             app:layout_constraintStart_toStartOf="parent"
-            android:paddingVertical="16dp"
+            android:paddingVertical="14dp"
+            android:layout_marginTop="2dp"
             android:clickable="true"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/list_item_background_middle"
+            android:foreground="?attr/selectableItemBackground"
             android:id="@+id/info_in_title_preference_layout">
 
             <TextView
                 android:id="@+id/info_in_title_preference_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="24dp"
                 android:text="@string/info_in_title_option_title"
                 android:textColor="?android:textColorPrimary"
-                android:fontFamily="@font/gs_flex"
-                android:textSize="20sp"
+                android:fontFamily="@font/gs_flex_medium"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/info_in_title_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -163,7 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/info_in_title_switch"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -174,10 +205,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/percentage_as_tile_icon_layout"
-            android:paddingVertical="16dp"
+            android:paddingVertical="14dp"
+            android:layout_marginTop="2dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/list_item_background_middle"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/info_in_title_preference_layout"
             app:layout_constraintBottom_toTopOf="@id/dynamic_tile_icon_layout">
@@ -186,12 +219,12 @@
                 android:id="@+id/percentage_as_tile_icon_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="24dp"
                 android:text="@string/bottom_sheet_preferences_percentage_as_tile_icon_title"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="20sp"
-                android:fontFamily="@font/gs_flex"
+                android:textSize="16sp"
+                android:fontFamily="@font/gs_flex_medium"
                 app:layout_constraintEnd_toStartOf="@+id/percentage_as_tile_icon_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -210,7 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/percentage_as_tile_icon_switch"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent" />
@@ -221,10 +254,12 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingVertical="16dp"
+            android:paddingVertical="14dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/list_item_background_middle"
+            android:foreground="?attr/selectableItemBackground"
             android:id="@+id/dynamic_tile_icon_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/percentage_as_tile_icon_layout">
@@ -233,12 +268,12 @@
                 android:id="@+id/dynamic_tile_icon_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="24dp"
                 android:text="@string/bottom_sheet_preferences_dynamic_tile_icon_title"
                 android:textColor="?android:textColorPrimary"
-                android:fontFamily="@font/gs_flex"
-                android:textSize="20sp"
+                android:fontFamily="@font/gs_flex_medium"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/dynamic_tile_icon_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -257,7 +292,7 @@
                 android:id="@+id/dynamic_tile_icon_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -268,10 +303,12 @@
             android:id="@+id/tile_state_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/list_item_background_middle"
             android:clickable="true"
             android:focusable="true"
-            android:paddingVertical="16dp"
+            android:foreground="?attr/selectableItemBackground"
+            android:paddingVertical="14dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/dynamic_tile_icon_layout">
 
@@ -279,12 +316,12 @@
                 android:id="@+id/tile_state_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="24dp"
+                android:fontFamily="@font/gs_flex_medium"
                 android:text="@string/dialog_customize_tile_state_title"
                 android:textColor="?android:textColorPrimary"
-                android:fontFamily="@font/gs_flex"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -293,8 +330,8 @@
                 android:id="@+id/tile_state_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/tile_state_always_on"
                 android:fontFamily="@font/gs_flex"
+                android:text="@string/tile_state_always_on"
                 app:layout_constraintEnd_toEndOf="@+id/tile_state_title"
                 app:layout_constraintStart_toStartOf="@+id/tile_state_title"
                 app:layout_constraintTop_toBottomOf="@id/tile_state_title" />
@@ -305,10 +342,12 @@
             android:id="@+id/tile_text_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/list_item_background_bottom"
+            android:foreground="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            android:paddingVertical="16dp"
+            android:paddingVertical="14dp"
+            android:layout_marginTop="2dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tile_state_layout">
 
@@ -316,13 +355,13 @@
                 android:id="@+id/tile_text_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginEnd="24dp"
                 android:text="@string/bottom_sheet_preferences_tile_text_title"
                 android:textColor="?android:textColorPrimary"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:fontFamily="@font/gs_flex"
+                android:fontFamily="@font/gs_flex_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -341,4 +380,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

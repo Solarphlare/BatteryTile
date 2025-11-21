@@ -69,7 +69,7 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
                     ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(requireContext(), R.font.gs_flex));
                     @SuppressLint("DiscouragedApi") int resId = getResources().getIdentifier("alertTitle", "id", requireContext().getPackageName());
                     ((TextView) Objects.requireNonNull(dialog.findViewById(resId))).setTypeface(ResourcesCompat.getFont(requireContext(), R.font.gs_flex));
-                    ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(requireContext(), R.font.gs_flex));
+                    ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(requireContext(), R.font.gs_flex_medium));
                 }
                 preferences
                         .edit()

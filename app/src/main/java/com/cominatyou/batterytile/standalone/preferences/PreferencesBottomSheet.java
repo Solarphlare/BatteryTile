@@ -170,7 +170,7 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
         binding.tileStateLayout.setOnClickListener(v -> TileStatePickerDialog.show(requireContext(), this::updateTileStateDescription));
         updateTileStateDescription();
 
-        binding.tileTextLayout.setOnClickListener(v -> TileTextDisambiguationDialog.show(requireContext()));
+        binding.tileTextLayout.setOnClickListener(v -> TileTextDisambiguationDialog.show(requireContext(), inflater));
 
         return binding.getRoot();
     }

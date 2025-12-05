@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/preferences_bottom_sheet_title"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="18dp"
             android:paddingVertical="14dp"
             android:id="@+id/emulate_power_save_tile_preference_layout"
             android:background="@drawable/list_item_background_top">

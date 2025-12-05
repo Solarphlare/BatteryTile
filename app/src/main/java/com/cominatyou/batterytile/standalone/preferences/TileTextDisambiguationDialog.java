@@ -21,7 +21,6 @@ public class TileTextDisambiguationDialog {
         TextView title = new TextView(context);
         title.setText(R.string.dialog_tile_text_disambiguation_title);
         title.setGravity(Gravity.CENTER);
-        title.setTextColor(com.google.android.material.R.attr.colorOnSurface);
         title.setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex));
         title.setPadding(60, 60, 60, 10);
         title.setTextSize(24);

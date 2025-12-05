@@ -3,7 +3,6 @@ package com.cominatyou.batterytile.standalone.debug;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,13 +10,11 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.BatteryManager;
-import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.cominatyou.batterytile.standalone.BuildConfig;
 import com.cominatyou.batterytile.standalone.R;
@@ -31,9 +28,7 @@ import com.github.k1rakishou.fsaf.file.FileDescriptorMode;
 import com.github.k1rakishou.fsaf.manager.base_directory.DirectoryManager;
 
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.concurrent.ExecutorService;
-import java.util.prefs.Preferences;
 
 public class DebugInfoCollector {
     @SuppressLint({"DefaultLocale"})

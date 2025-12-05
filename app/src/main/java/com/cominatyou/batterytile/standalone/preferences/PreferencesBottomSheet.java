@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,8 @@ import android.widget.TextView;
 import com.cominatyou.batterytile.standalone.R;
 import com.cominatyou.batterytile.standalone.databinding.BottomSheetPreferencesBinding;
 import com.cominatyou.batterytile.standalone.debug.DebugDialog;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -41,6 +44,7 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
     private boolean checkIfPermissionIsDenied() {
         return requireContext().checkCallingOrSelfPermission(Manifest.permission.WRITE_SECURE_SETTINGS) != PackageManager.PERMISSION_GRANTED;
     }
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = BottomSheetPreferencesBinding.inflate(inflater, container, false);
         final SharedPreferences preferences = requireContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
@@ -190,6 +194,23 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
         binding.tileStateDescription.setAlpha(enabled ? 1 : 0.4f);
         binding.tileStateLayout.setEnabled(enabled);
         updateTileStateDescription();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // only for tablets. expand the sheet all the way, otherwise only the title portion is shown on screen
+        if ((requireContext().getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE) {
+            final BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+            assert dialog != null;
+
+            final View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            assert bottomSheet != null;
+
+            final BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        }
     }
 
     public void onDismiss(@NonNull DialogInterface dialog) {

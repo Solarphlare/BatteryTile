@@ -74,6 +74,8 @@
                 android:text="@string/emulate_power_save_tile_preference_title"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/emulate_power_save_tile_preference_description"
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toStartOf="@+id/emulate_power_save_tile_preference_switch"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,6 +88,7 @@
                 android:fontFamily="@font/gs_flex"
                 android:text="@string/emulate_power_save_tile_preference_description"
                 android:textColor="?android:textColorSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/emulate_power_save_tile_preference_title"
                 app:layout_constraintStart_toStartOf="@+id/emulate_power_save_tile_preference_title"
                 app:layout_constraintTop_toBottomOf="@id/emulate_power_save_tile_preference_title" />
@@ -123,6 +126,8 @@
                 android:text="@string/enable_tap_action_preference_title"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/tappable_tile_description"
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toStartOf="@+id/tappable_tile_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -135,6 +140,7 @@
                 android:fontFamily="@font/gs_flex"
                 android:text="@string/enable_tap_action_preference_description"
                 android:textColor="?android:textColorSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tappable_tile_title"
                 app:layout_constraintStart_toStartOf="@+id/tappable_tile_title"
                 app:layout_constraintTop_toBottomOf="@id/tappable_tile_title" />
@@ -171,6 +177,8 @@
                 android:textColor="?android:textColorPrimary"
                 android:fontFamily="@font/gs_flex_medium"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/info_in_title_preference_description"
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toStartOf="@+id/info_in_title_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -183,6 +191,7 @@
                 android:fontFamily="@font/gs_flex"
                 android:text="@string/info_in_title_option_description"
                 android:textColor="?android:textColorSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/info_in_title_preference_title"
                 app:layout_constraintStart_toStartOf="@id/info_in_title_preference_title"
                 app:layout_constraintTop_toBottomOf="@id/info_in_title_preference_title" />
@@ -221,6 +230,8 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="16sp"
                 android:fontFamily="@font/gs_flex_medium"
+                app:layout_constraintBottom_toTopOf="@+id/percentage_as_tile_icon_description"
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toStartOf="@+id/percentage_as_tile_icon_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -231,6 +242,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gs_flex"
                 android:text="@string/bottom_sheet_preferences_percentage_as_tile_icon_description"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/percentage_as_tile_icon_title"
                 app:layout_constraintStart_toStartOf="@+id/percentage_as_tile_icon_title"
                 app:layout_constraintTop_toBottomOf="@id/percentage_as_tile_icon_title" />
@@ -269,6 +281,8 @@
                 android:textColor="?android:textColorPrimary"
                 android:fontFamily="@font/gs_flex_medium"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/dynamic_tile_icon_description"
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toStartOf="@+id/dynamic_tile_icon_switch"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -279,6 +293,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gs_flex"
                 android:text="@string/bottom_sheet_preferences_dynamic_tile_icon_description"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/dynamic_tile_icon_title"
                 app:layout_constraintStart_toStartOf="@+id/dynamic_tile_icon_title"
                 app:layout_constraintTop_toBottomOf="@id/dynamic_tile_icon_title" />
@@ -316,6 +331,8 @@
                 android:text="@string/dialog_customize_tile_state_title"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/tile_state_description"
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -326,6 +343,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gs_flex"
                 android:text="@string/tile_state_always_on"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tile_state_title"
                 app:layout_constraintStart_toStartOf="@+id/tile_state_title"
                 app:layout_constraintTop_toBottomOf="@id/tile_state_title" />
@@ -353,6 +371,8 @@
                 android:text="@string/bottom_sheet_preferences_tile_text_title"
                 android:textColor="?android:textColorPrimary"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/tile_text_description"
+                app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:fontFamily="@font/gs_flex_medium"
                 app:layout_constraintStart_toStartOf="parent"
@@ -364,6 +384,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/bottom_sheet_preferences_tile_text_description"
                 android:fontFamily="@font/gs_flex"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tile_text_title"
                 app:layout_constraintStart_toStartOf="@+id/tile_text_title"
                 app:layout_constraintTop_toBottomOf="@id/tile_text_title" />

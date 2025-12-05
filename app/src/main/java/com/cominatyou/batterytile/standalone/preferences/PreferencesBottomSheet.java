@@ -46,7 +46,7 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
         final SharedPreferences preferences = requireContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
 
         binding.preferencesBottomSheetTitle.setOnLongClickListener(l -> {
-            DebugDialog.show(requireContext());
+            DebugDialog.show(requireActivity());
             return true;
         });
 

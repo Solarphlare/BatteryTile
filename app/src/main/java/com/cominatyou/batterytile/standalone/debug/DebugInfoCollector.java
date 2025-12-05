@@ -3,19 +3,37 @@ package com.cominatyou.batterytile.standalone.debug;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.BatteryManager;
+import android.os.Build;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cominatyou.batterytile.standalone.BuildConfig;
 import com.cominatyou.batterytile.standalone.R;
+import com.cominatyou.batterytile.standalone.preferences.PreferencesActivity;
+import com.github.k1rakishou.fsaf.BadPathSymbolResolutionStrategy;
+import com.github.k1rakishou.fsaf.FileChooser;
+import com.github.k1rakishou.fsaf.FileManager;
+import com.github.k1rakishou.fsaf.callback.FileCreateCallback;
+import com.github.k1rakishou.fsaf.file.ExternalFile;
+import com.github.k1rakishou.fsaf.file.FileDescriptorMode;
+import com.github.k1rakishou.fsaf.manager.base_directory.DirectoryManager;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.concurrent.ExecutorService;
+import java.util.prefs.Preferences;
 
 public class DebugInfoCollector {
     @SuppressLint({"DefaultLocale"})
@@ -32,39 +50,42 @@ public class DebugInfoCollector {
             return;
         }
 
-        final int status = initialBatteryIntent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        final boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
-        collectBatteryInfoPasses(context, dialog, debugInfo, isCharging);
+        final int plugState = initialBatteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+        final boolean isPluggedIn = plugState != 0;
+        collectBatteryInfoPasses(context, dialog, debugInfo, isPluggedIn);
 
-        if (!isCharging) {
+        if (!isPluggedIn) {
             context.getMainExecutor().execute(() -> dialog.setMessage(context.getString(R.string.debug_dialog_connect_to_power_description)));
 
             final BroadcastReceiver chargingStateReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context ctx, Intent intent) {
-                    final int newStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-                    if (newStatus == BatteryManager.BATTERY_STATUS_CHARGING || newStatus == BatteryManager.BATTERY_STATUS_FULL) {
+                    final int newStatus = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                    if (newStatus != 0) {
                         context.unregisterReceiver(this);
                         // Use the provided executor to run the second collection pass off the main thread.
                         executorService.submit(() -> {
                             collectBatteryInfoPasses(context, dialog, debugInfo, true);
-                            shareReport(context, dialog, debugInfo.toString());
+                            // Switch to Main Thread before interacting with UI or FileChooser
+                            context.getMainExecutor().execute(() -> shareReport(context, dialog, debugInfo.toString()));
                         });
                     }
                 }
             };
             context.registerReceiver(chargingStateReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        } else {
+        }
+        else {
             context.getMainExecutor().execute(() -> dialog.setMessage(context.getString(R.string.debug_dialog_disconnect_from_power_description)));
             final BroadcastReceiver dischargingStateReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context ctx, Intent intent) {
-                    final int newStatus = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-                    if (newStatus != BatteryManager.BATTERY_STATUS_CHARGING && newStatus != BatteryManager.BATTERY_STATUS_FULL) {
+                    final int newStatus = intent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0);
+                    if (newStatus == 0) {
                         context.unregisterReceiver(this);
                         executorService.submit(() -> {
                             collectBatteryInfoPasses(context, dialog, debugInfo, false);
-                            shareReport(context, dialog, debugInfo.toString());
+                            // Switch to Main Thread before interacting with UI or FileChooser
+                            context.getMainExecutor().execute(() -> shareReport(context, dialog, debugInfo.toString()));
                         });
                     }
                 }
@@ -107,7 +128,7 @@ public class DebugInfoCollector {
         final int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
         final long remainingChargeTime = bm.computeChargeTimeRemaining();
 
-        final String powerSource = switch (batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1)) {
+        final String powerSource = switch (batteryIntent.getIntExtra(BatteryManager.EXTRA_PLUGGED, 0)) {
             case BatteryManager.BATTERY_PLUGGED_AC -> "AC";
             case BatteryManager.BATTERY_PLUGGED_USB -> "USB";
             case BatteryManager.BATTERY_PLUGGED_WIRELESS -> "Wireless";
@@ -131,14 +152,50 @@ public class DebugInfoCollector {
         return batteryInfo.toString();
     }
 
-    private static void shareReport(final Context context, AlertDialog dialog, String report) {
-        final Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, "Battery Tile Debug Report");
-        intent.putExtra(Intent.EXTRA_TEXT, report);
+    private static void shareReport(final Context context, final AlertDialog dialog, final String report) {
+        final FileManager fileManager = new FileManager(context, BadPathSymbolResolutionStrategy.ReplaceBadSymbols, new DirectoryManager(context));
+        final String fileName = "battery_tile_debug_report_" + System.currentTimeMillis() + ".txt";
 
-        context.startActivity(Intent.createChooser(intent, null));
-        context.getMainExecutor().execute(dialog::dismiss);
+        final PreferencesActivity owningActivity = (PreferencesActivity) dialog.getOwnerActivity();
+
+        assert owningActivity != null;
+        final FileChooser fileChooser = owningActivity.getFileChooser();
+
+        fileChooser.openCreateFileDialog(fileName, new FileCreateCallback() {
+            @Override
+            public void onResult(@NonNull Uri uri) {
+                final ExternalFile externalFile = fileManager.fromUri(uri);
+                if (externalFile == null) {
+                    Log.e("DebugInfoCollector", "File creation dialog returned an external file that is null");
+                    Toast.makeText(context, context.getString(R.string.debug_dialog_failed_to_save_report_toast), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    return;
+                }
+
+                fileManager.withFileDescriptor(externalFile, FileDescriptorMode.Write, fileDescriptor -> {
+                    try {
+                        try (final FileOutputStream os = new FileOutputStream(fileDescriptor)) {
+                            os.write(report.getBytes());
+                            os.flush();
+                        }
+                    }
+                    catch (Exception e) {
+                        Log.e("DebugInfoCollector", "Unable to open output stream");
+                        Toast.makeText(context, context.getString(R.string.debug_dialog_failed_to_save_report_toast), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                        return true;
+                    }
+
+                    return true;
+                });
+            }
+
+            @Override
+            public void onCancel(@NonNull String s) {
+                dialog.dismiss();
+            }
+        });
+
     }
 
     @SuppressLint("DefaultLocale")

@@ -173,6 +173,8 @@ public class DebugInfoCollector {
                             os.write(report.getBytes());
                             os.flush();
                         }
+
+                        dialog.dismiss();
                     }
                     catch (Exception e) {
                         Log.e("DebugInfoCollector", "Unable to open output stream");

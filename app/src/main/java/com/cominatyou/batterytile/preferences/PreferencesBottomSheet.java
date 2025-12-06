@@ -57,13 +57,13 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
 
         binding.infoInTitleSwitch.setChecked(preferences.getBoolean("infoInTitle", false));
 
-        binding.tileStateLayout.setOnClickListener(v -> TileStatePickerDialog.show(requireContext(), this::updateTileStateDescription));
+        binding.tileStateLayout.setOnClickListener(v -> TileStatePickerDialog.show(requireContext(), inflater, this::updateTileStateDescription));
         updateTileStateDescription();
 
-        binding.tileTextLayout.setOnClickListener(v -> TileTextDisambiguationDialog.show(requireContext()));
+        binding.tileTextLayout.setOnClickListener(v -> TileTextDisambiguationDialog.show(requireContext(), inflater));
 
         binding.preferencesBottomSheetTitle.setOnLongClickListener(l -> {
-            DebugDialog.show(requireContext());
+            DebugDialog.show(requireActivity());
             return true;
         });
 

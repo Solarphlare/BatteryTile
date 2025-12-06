@@ -5,13 +5,13 @@
     <item android:id="@android:id/mask">
         <shape>
             <solid android:color="#000000"/>
-            <corners android:bottomLeftRadius="4dp" android:bottomRightRadius="4dp" android:topLeftRadius="16dp" android:topRightRadius="16dp"/>
+            <corners android:bottomLeftRadius="4dp" android:bottomRightRadius="4dp" android:topLeftRadius="20dp" android:topRightRadius="20dp"/>
         </shape>
     </item>
     <item>
         <shape>
             <solid android:color="?attr/colorSurfaceBright"/>
-            <corners android:bottomLeftRadius="4dp" android:bottomRightRadius="4dp" android:topLeftRadius="16dp" android:topRightRadius="16dp"/>
+            <corners android:bottomLeftRadius="4dp" android:bottomRightRadius="4dp" android:topLeftRadius="20dp" android:topRightRadius="20dp"/>
         </shape>
     </item>
 </ripple>

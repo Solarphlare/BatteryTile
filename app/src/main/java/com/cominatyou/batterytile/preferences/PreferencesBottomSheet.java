@@ -3,6 +3,7 @@ package com.cominatyou.batterytile.preferences;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import androidx.annotation.NonNull;
 import com.cominatyou.batterytile.R;
 import com.cominatyou.batterytile.databinding.BottomSheetPreferencesBinding;
 import com.cominatyou.batterytile.debug.DebugDialog;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class PreferencesBottomSheet extends BottomSheetDialogFragment {
@@ -77,6 +80,23 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
             case 0 -> binding.tileStateDescription.setText(R.string.tile_state_always_on);
             case 1 -> binding.tileStateDescription.setText(R.string.tile_state_on_when_charging);
             case 2 -> binding.tileStateDescription.setText(R.string.tile_state_always_off);
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // only for tablets. expand the sheet all the way, otherwise only the title portion is shown on screen
+        if ((requireContext().getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE) {
+            final BottomSheetDialog dialog = (BottomSheetDialog) getDialog();
+            assert dialog != null;
+
+            final View bottomSheet = dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            assert bottomSheet != null;
+
+            final BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         }
     }
 

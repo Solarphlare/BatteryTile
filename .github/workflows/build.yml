@@ -6,12 +6,7 @@ on:
       - '**.java'
       - '**.gradle'
       - '**.xml'
-  pull_request_target:
-    types: ['opened', 'synchronize']
-    paths:
-      - '**.java'
-      - '**.gradle'
-      - '**.xml'
+  pull_request:
   workflow_dispatch:
 
 jobs:

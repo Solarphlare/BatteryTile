@@ -16,7 +16,7 @@ This app is compatible with API 29+ devices (Android 10 or higher), as Quick Set
 
 Theoretically, compatibility could be extended to cover API 24+ as well (Android 7 and up) if references to
 [Tile#setSubtitle](https://developer.android.com/reference/android/service/quicksettings/Tile#setSubtitle(java.lang.CharSequence))
-were removed. However, this would defeat one of the purposes of the tile, but the option to do so is available to anyone who wishes to compile it themselves.
+were removed. However, this would defeat one of the purposes of the tile, but the option to do so is available to anyone who wishes to compile it on their own.
 
 ## Download
 The latest version can be downloaded from [releases page](https://github.com/CominAtYou/BatteryTile/releases/latest).
@@ -53,7 +53,7 @@ Android has no official API to allow apps to control the state of the Battery Sa
 As to why these features aren't officially supported, Android does not expect Battery Saver to be enabled or disabled via the Settings class. Because of this, these features can cause Android itself to no longer be able to control whether or not Battery Saver is on or off. This will mean that after using this app's tile to toggle Battery Saver, things like the standard Android Battery Saver tile won't work anymore, nor will the Battery Saver switches in your Settings app work, as well as any feature that automatically enables Battery Saver. However, tapping the tile from this app again to reverse the change will automatically fix this.
 
 ### Why is my language missing some formatters in its description?
-The translations for this app are provided by the community. This means that when I add a new formatter, I'm not able to add a translation for any language other than English, meaning that the description text will be missing some formatters. They'll still work if you type them in — they're just not in the description text. If you speak a language that's missing formatters, feel free to open a pull request with any translations.
+The translations for this app are provided by the community. This means that when a new formatter is added, I'm not able to add a translation for any language other than English, meaning that the description text will be missing some formatters. They'll still work if you type them in — they're just not in the description text. If you speak a language that's missing formatters, feel free to open a pull request with any translations.
 
 
 ### My question isn't listed here!

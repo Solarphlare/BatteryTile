@@ -58,9 +58,17 @@
     <string name="activity_edit_text_discard_dialog_positive_button">Keep editing</string>
     <string name="menu_edit_title_save_button">Save</string>
     <string name="bottom_sheet_preferences_dynamic_tile_icon_title">Dynamic tile icon</string>
-    <string name="bottom_sheet_preferences_dynamic_tile_icon_description">Display the power source in the tile icon when charging</string>
+    <string name="bottom_sheet_preferences_dynamic_tile_icon_description">Display the power source as the tile icon when charging</string>
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_title">Battery percentage as tile icon</string>
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_description">Display the current battery percentage as the tile icon</string>
     <string name="requires_adb_dialog_copy_success">ADB command copied!</string>
     <string name="requires_adb_dialog_copy_button">Copy ADB command</string>
     <string name="live_tile_updates_title">Live tile updates</string>
     <string name="live_tile_updates_description">Update the tile\'s text every two seconds, as opposed to only when the battery\'s level or state changes.</string>
+    <string name="debug_dialog_title">"Collecting Debug Info"</string>
+    <string name="debug_dialog_initial_description">This won\'t take very long.</string>
+    <string name="debug_dialog_collecting_info_description">Collecting battery info… (pass %1$d)</string>
+    <string name="debug_dialog_connect_to_power_description">Please connect your device to power to continue.</string>
+    <string name="debug_dialog_disconnect_from_power_description">Please disconnect your device from power to continue.</string>
+    <string name="debug_dialog_failed_to_save_report_toast">Failed to save report</string>
 </resources>

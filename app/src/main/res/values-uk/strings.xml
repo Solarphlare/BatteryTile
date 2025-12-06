@@ -43,7 +43,6 @@
     <string name="dialog_tile_text_disambiguation_title">Який текст потрібно змінити?</string>
     <string name="activity_edit_tile_text_title">Змінити тексту на плитці</string>
     <string name="activity_edit_tile_text_text_input_hint">Текст на плитці</string>
-    <!-- The following two resources need translations for %h, %w, and %m.  -->
     <string name="activity_edit_discharging_tile_text_info_text">Змініть текст, що відображається на плитці. Наступні значення можуть бути використані для відображення інформації про батарею на плитці:\n\n• %%c: Струм акумулятора в міліамперах\n• %%a: Середній струм акумулятора в міліамперах\n• %%t: Температура акумулятора в градусах Цельсія\n• %%f: Температура акумулятора в градусах Фаренгейта\n• %%v: Напруга акумулятора\n• %%l: Поточний заряд акумулятора у відсотках\n\nТак, наприклад, якщо встановити текст \"Акумулятор: %%l%%\" то на плитці буде відображатися \"Акумулятор: 69%%\".\n\nЯкщо залишити це поле порожнім, то на плитці буде відображатися %1$s</string>
     <string name="activity_edit_charging_tile_text_info_text">Змініть текст, що відображається на плитці. Наступні значення можуть бути використані для відображення інформації про батарею на плитці:\n\n• %%c: Струм акумулятора в міліамперах\n• %%a: Середній струм акумулятора в міліамперах\n• %%t: Температура акумулятора в градусах Цельсія\n• %%f: Температура акумулятора в градусах Фаренгейта\n• %%v: Напруга акумулятора\n• %%l: Поточний заряд акумулятора у відсотках\n\nТак, наприклад, якщо встановити текст \"Акумулятор: %%l%%\" то на плитці буде відображатися \"Акумулятор: 69%%\".\n\nЯкщо залишити це поле порожнім, то на плитці буде відображатися %1$s</string>
     <string name="activity_edit_tile_text_info_text_default_charging">відсоток заряду та приблизний час заряджання.</string>
@@ -58,5 +57,13 @@
     <string name="bottom_sheet_preferences_dynamic_tile_icon_description">Відображати на плитці джерело живлення під час заряджання</string>
     <string name="requires_adb_dialog_copy_success">ADB команду скопійовано!</string>
     <string name="requires_adb_dialog_copy_button">Копіювати ADB команду</string>
-    <!-- TL: Need live_tile_updates_title and live_tile_updates_description -->
+    <!--  These need to be translated. Any help would be appreciated!  -->
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_title">Battery percentage as tile icon</string>
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_description">Display the current battery percentage as the tile icon</string>
+    <string name="debug_dialog_title">"Collecting Debug Info"</string>
+    <string name="debug_dialog_initial_description">This won\'t take very long.</string>
+    <string name="debug_dialog_collecting_info_description">Collecting battery info… (pass %1$d)</string>
+    <string name="debug_dialog_connect_to_power_description">Please connect your device to power to continue.</string>
+    <string name="debug_dialog_disconnect_from_power_description">Please disconnect your device from power to continue.</string>
+    <string name="debug_dialog_failed_to_save_report_toast">Failed to save report</string>
 </resources>

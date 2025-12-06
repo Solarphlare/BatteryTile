@@ -70,8 +70,4 @@
         <item name="android:fontFamily">@font/gs_flex</item>
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
-
-    <style name="CircularImageView" parent="Widget.MaterialComponents.ShapeableImageView">
-        <item name="cornerSize">50%</item>
-    </style>
 </resources>

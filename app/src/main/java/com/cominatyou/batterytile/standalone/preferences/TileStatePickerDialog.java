@@ -2,10 +2,8 @@ package com.cominatyou.batterytile.standalone.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
@@ -20,13 +18,6 @@ public class TileStatePickerDialog {
     public static void show(Context context, LayoutInflater inflater, Runnable completionHandler) {
         int[] choice = { 0 };
         final SharedPreferences preferences = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
-
-//        TextView title = new TextView(context);
-//        title.setText(R.string.dialog_tile_state_picker_title);
-//        title.setGravity(Gravity.CENTER);
-//        title.setPadding(60, 60, 60, 10);
-//        title.setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex));
-//        title.setTextSize(24);
 
         final TileStateDialogHeaderLayoutBinding binding = TileStateDialogHeaderLayoutBinding.inflate(inflater);
 

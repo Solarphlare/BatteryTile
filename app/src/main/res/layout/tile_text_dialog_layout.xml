@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:importantForAccessibility="no"
         android:id="@+id/tile_text_disambiguation_dialog_header_icon"
-        android:src="@drawable/edit_text" />
+        android:src="@drawable/ic_edit_text" />
 
 
     <TextView

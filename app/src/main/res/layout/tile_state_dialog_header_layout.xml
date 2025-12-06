@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="24dp"
-    android:paddingBottom="18dp"
     android:paddingTop="24dp">
 
     <ImageView
@@ -15,7 +14,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:importantForAccessibility="no"
         android:id="@+id/tile_state_dialog_header_icon"
-        android:src="@drawable/toggle_on" />
+        android:src="@drawable/ic_toggle_on" />
 
 
     <TextView

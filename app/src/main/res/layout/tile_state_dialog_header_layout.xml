@@ -27,7 +27,7 @@
         android:id="@+id/tile_text_disambiguation_dialog_title"
         android:textSize="24sp"
         android:gravity="center"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:textColor="?attr/colorOnSurface"
         android:fontFamily="@font/gs_flex"/>
 

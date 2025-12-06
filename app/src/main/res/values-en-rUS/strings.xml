@@ -53,4 +53,5 @@
     <string name="debug_dialog_collecting_info_description">Collecting battery info… (pass %1$d)</string>
     <string name="debug_dialog_connect_to_power_description">Please connect your device to power to continue.</string>
     <string name="debug_dialog_disconnect_from_power_description">Please disconnect your device from power to continue.</string>
+    <string name="debug_dialog_failed_to_save_report_toast">Failed to save report</string>
 </resources>

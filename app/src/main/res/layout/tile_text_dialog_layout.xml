@@ -13,6 +13,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:importantForAccessibility="no"
         android:id="@+id/tile_text_disambiguation_dialog_header_icon"
         android:src="@drawable/edit_text" />
 

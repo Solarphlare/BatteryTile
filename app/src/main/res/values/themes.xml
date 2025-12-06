@@ -68,6 +68,7 @@
 
     <style name="CheckedTextViewStyle" parent="Widget.Material3.CheckedTextView">
         <item name="android:fontFamily">@font/gs_flex</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
 
     <style name="CircularImageView" parent="Widget.MaterialComponents.ShapeableImageView">

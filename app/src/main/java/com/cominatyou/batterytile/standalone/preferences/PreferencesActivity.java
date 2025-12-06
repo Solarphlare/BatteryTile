@@ -43,7 +43,7 @@ public class PreferencesActivity extends AppCompatActivity implements FSAFActivi
     });
 
     @Override
-    public void fsafStartActivityForResult(Intent intent, int requestCode) {
+    public void fsafStartActivityForResult(@NonNull Intent intent, int requestCode) {
         this.pendingFsafRequestCode = requestCode;
         fsafLauncher.launch(intent);
     }

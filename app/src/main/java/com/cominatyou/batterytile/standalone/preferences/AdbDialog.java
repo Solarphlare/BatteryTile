@@ -6,6 +6,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,14 +15,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.cominatyou.batterytile.standalone.R;
+import com.cominatyou.batterytile.standalone.databinding.AdbDialogHeaderLayoutBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.Objects;
 
 public class AdbDialog {
-    public static void show(Context context) {
+    public static void show(Context context, LayoutInflater inflater) {
+        final AdbDialogHeaderLayoutBinding binding = AdbDialogHeaderLayoutBinding.inflate(inflater);
+
         final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context)
-                .setTitle(R.string.requires_adb_dialog_title)
+                .setCustomTitle(binding.getRoot())
                 .setMessage(Html.fromHtml(context.getString(R.string.requires_adb_dialog_description) + "<br><br><tt>adb shell pm grant " + context.getPackageName() + " " + Manifest.permission.WRITE_SECURE_SETTINGS +
                         "</tt><br><br>" + context.getString(R.string.requires_adb_dialog_description_second_half), Html.FROM_HTML_MODE_COMPACT))
                 .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss())

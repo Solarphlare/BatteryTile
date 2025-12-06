@@ -20,7 +20,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cominatyou.batterytile.standalone.R;
+import com.cominatyou.batterytile.standalone.databinding.AdbDialogHeaderLayoutBinding;
 import com.cominatyou.batterytile.standalone.databinding.BottomSheetPreferencesBinding;
+import com.cominatyou.batterytile.standalone.databinding.PowerSaveWarningDialogHeaderLayoutBinding;
 import com.cominatyou.batterytile.standalone.debug.DebugDialog;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -59,12 +61,14 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
         binding.tappableTileSwitch.setOnCheckedChangeListener((self, state) -> {
             if (checkIfPermissionIsDenied() && state) {
                 self.setChecked(false);
-                AdbDialog.show(requireContext());
+                AdbDialog.show(requireContext(), inflater);
             }
             else {
                 if (state && showDialog) {
+                    final PowerSaveWarningDialogHeaderLayoutBinding binding = PowerSaveWarningDialogHeaderLayoutBinding.inflate(inflater);
+
                     final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
-                            .setTitle(R.string.power_save_tile_warning_title)
+                            .setCustomTitle(binding.getRoot())
                             .setMessage(R.string.power_save_system_warning_description)
                             .setPositiveButton(android.R.string.ok, (dialog, which) -> dialog.dismiss());
 
@@ -89,7 +93,7 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
         binding.emulatePowerSaveTilePreferenceSwitch.setOnCheckedChangeListener((self, state) -> {
             if (checkIfPermissionIsDenied() && state) {
                 self.setChecked(false);
-                AdbDialog.show(requireContext());
+                AdbDialog.show(requireContext(), inflater);
             }
             else {
                 forceTappableTile(state);

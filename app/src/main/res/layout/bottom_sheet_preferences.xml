@@ -67,13 +67,59 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/percentage_as_tile_icon_layout"
+        android:paddingVertical="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/info_in_title_preference_layout"
+        app:layout_constraintBottom_toTopOf="@id/dynamic_tile_icon_layout">
+
+        <TextView
+            android:id="@+id/percentage_as_tile_icon_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/bottom_sheet_preferences_percentage_as_tile_icon_title"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/percentage_as_tile_icon_switch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/percentage_as_tile_icon_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/bottom_sheet_preferences_percentage_as_tile_icon_description"
+            app:layout_constraintEnd_toEndOf="@+id/percentage_as_tile_icon_title"
+            app:layout_constraintStart_toStartOf="@+id/percentage_as_tile_icon_title"
+            app:layout_constraintTop_toBottomOf="@id/percentage_as_tile_icon_title" />
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/percentage_as_tile_icon_switch"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:paddingVertical="16dp"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackground"
         android:id="@+id/dynamic_tile_icon_layout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/info_in_title_preference_layout">
+        app:layout_constraintTop_toBottomOf="@id/percentage_as_tile_icon_layout">
 
         <TextView
             android:id="@+id/dynamic_tile_icon_title"
@@ -107,6 +153,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/tile_state_layout"

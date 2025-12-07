@@ -64,7 +64,7 @@
     <string name="requires_adb_dialog_copy_success">ADB command copied!</string>
     <string name="requires_adb_dialog_copy_button">Copy ADB command</string>
     <string name="live_tile_updates_title">Live tile updates</string>
-    <string name="live_tile_updates_description">Update the tile\'s text every two seconds, as opposed to only when the battery\'s level or state changes.</string>
+    <string name="live_tile_updates_description">Update the tile\'s text every five seconds, as opposed to only when the battery\'s level or state changes.</string>
     <string name="debug_dialog_title">"Collecting Debug Info"</string>
     <string name="debug_dialog_initial_description">This won\'t take very long.</string>
     <string name="debug_dialog_collecting_info_description">Collecting battery info… (pass %1$d)</string>

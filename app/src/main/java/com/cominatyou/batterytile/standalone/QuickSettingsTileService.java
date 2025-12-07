@@ -194,7 +194,7 @@ public class QuickSettingsTileService extends TileService {
 
                     setBatteryInfo(batteryStateIntent);
                 }
-            }, 2000, 2000);
+            }, 5000, 5000);
 
             hasTimerBeenScheduled = true;
         }
@@ -227,8 +227,6 @@ public class QuickSettingsTileService extends TileService {
         }
         if (!shouldEmulatePowerSaveTile) {
             updateTask.cancel();
-            updateTask.purge();
-
             unregisterReceiver(batteryStateReceiver);
         }
     }

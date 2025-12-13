@@ -28,7 +28,7 @@ body:
     attributes:
       label: Version
       description: What version of the app are you running?
-      placeholder: e.g., 1.9.0
+      placeholder: e.g., 2.0.0 or 1.8.0-googleRelease
     validations:
       required: true
   - type: checkboxes

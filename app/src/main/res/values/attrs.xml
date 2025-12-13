@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PreferenceItemView">
+        <attr name="preferenceTitle" format="string" />
+        <attr name="preferenceDescription" format="string" />
+    </declare-styleable>
+</resources>

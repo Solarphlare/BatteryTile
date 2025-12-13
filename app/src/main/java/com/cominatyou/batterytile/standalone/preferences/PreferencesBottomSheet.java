@@ -36,11 +36,8 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
     boolean showDialog = false;
 
     private void forceTappableTile(boolean force) {
-        binding.tappableTileSwitch.setChecked(force);
-        binding.tappableTileSwitch.setEnabled(!force);
-        binding.tappableTileTitle.setAlpha(force ? 0.4f : 1);
-        binding.tappableTileDescription.setAlpha(force ? 0.4f : 1);
-        binding.tappableTileLayout.setEnabled(!force);
+        binding.tappableTilePreference.setChecked(force);
+        binding.tappableTilePreference.setEnabled(!force);
     }
 
     private boolean checkIfPermissionIsDenied() {
@@ -56,9 +53,9 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
             return true;
         });
 
-        binding.tappableTileLayout.setOnClickListener(self -> binding.tappableTileSwitch.toggle());
+        binding.tappableTilePreference.setOnClickListener(self -> binding.tappableTilePreference.toggle());
 
-        binding.tappableTileSwitch.setOnCheckedChangeListener((self, state) -> {
+        binding.tappableTilePreference.setOnCheckedChangeListener((self, state) -> {
             if (checkIfPermissionIsDenied() && state) {
                 self.setChecked(false);
                 AdbDialog.show(requireContext(), inflater);
@@ -88,9 +85,9 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
             }
         });
 
-        binding.emulatePowerSaveTilePreferenceLayout.setOnClickListener(self -> binding.emulatePowerSaveTilePreferenceSwitch.toggle());
+        binding.emulatePowerSaveTilePreference.setOnClickListener(self -> binding.emulatePowerSaveTilePreference.toggle());
 
-        binding.emulatePowerSaveTilePreferenceSwitch.setOnCheckedChangeListener((self, state) -> {
+        binding.emulatePowerSaveTilePreference.setOnCheckedChangeListener((self, state) -> {
             if (checkIfPermissionIsDenied() && state) {
                 self.setChecked(false);
                 AdbDialog.show(requireContext(), inflater);
@@ -101,75 +98,64 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
                 setTileStatePreferenceEnabled(!state);
 
                 binding.tileTextLayout.setEnabled(!state);
-                binding.tileTextTitle.setAlpha(state ? 0.4f : 1);
-                binding.tileTextDescription.setAlpha(state ? 0.4f : 1);
-                binding.tileTextDescription.setText(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_tile_text_description));
+                binding.tileTextLayout.setDescription(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_tile_text_description));
 
-                binding.infoInTitlePreferenceLayout.setEnabled(!state);
-                binding.infoInTitlePreferenceTitle.setAlpha(state ? 0.4f : 1);
-                binding.infoInTitlePreferenceDescription.setAlpha(state ? 0.4f : 1);
-                binding.infoInTitlePreferenceDescription.setText(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.info_in_title_option_description));
-                binding.infoInTitleSwitch.setChecked(false);
-                binding.infoInTitleSwitch.setEnabled(!state);
+                binding.infoInTitlePreference.setChecked(false);
+                binding.infoInTitlePreference.setEnabled(!state);
+                binding.infoInTitlePreference.setDescription(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_percentage_as_tile_icon_description));
 
-                binding.percentageAsTileIconSwitch.setEnabled(!state);
-                binding.percentageAsTileIconLayout.setEnabled(!state);
-                binding.dynamicTileIconSwitch.setChecked(false);
-                binding.percentageAsTileIconTitle.setAlpha(state ? 0.4f : 1);
-                binding.percentageAsTileIconDescription.setAlpha(state ? 0.4f : 1);
-                binding.percentageAsTileIconDescription.setText(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_percentage_as_tile_icon_description));
+                binding.percentageAsTileIconPreference.setChecked(false);
+                binding.percentageAsTileIconPreference.setEnabled(!state);
+                binding.percentageAsTileIconPreference.setDescription(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_percentage_as_tile_icon_description));
 
-                binding.dynamicTileIconLayout.setEnabled(!state);
-                binding.dynamicTileIconTitle.setAlpha(state ? 0.4f : 1);
-                binding.dynamicTileIconDescription.setAlpha(state ? 0.4f : 1);
-                binding.dynamicTileIconDescription.setText(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_dynamic_tile_icon_description));
-                binding.dynamicTileIconSwitch.setChecked(false);
-                binding.dynamicTileIconSwitch.setEnabled(!state);
+                binding.dynamicTileIconPreference.setChecked(false);
+                binding.dynamicTileIconPreference.setEnabled(!state);
+                binding.dynamicTileIconPreference.setDescription(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_dynamic_tile_icon_description));
+
+                binding.dynamicTileIconPreference.setChecked(false);
+                binding.dynamicTileIconPreference.setEnabled(!state);
+                binding.dynamicTileIconPreference.setDescription(getString(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_dynamic_tile_icon_description));
             }
         });
 
-        binding.infoInTitlePreferenceLayout.setOnClickListener(self -> binding.infoInTitleSwitch.toggle());
-        binding.infoInTitleSwitch.setOnCheckedChangeListener((self, state) -> preferences.edit().putBoolean("infoInTitle", state).apply());
+        binding.infoInTitlePreference.setOnClickListener(self -> binding.infoInTitlePreference.toggle());
+        binding.infoInTitlePreference.setOnCheckedChangeListener((self, state) -> preferences.edit().putBoolean("infoInTitle", state).apply());
 
-        binding.percentageAsTileIconLayout.setOnClickListener(self -> binding.percentageAsTileIconSwitch.toggle());
+        binding.percentageAsTileIconPreference.setOnClickListener(self -> binding.percentageAsTileIconPreference.toggle());
 
-        binding.percentageAsTileIconSwitch.setOnCheckedChangeListener((self, state) -> {
-            binding.dynamicTileIconSwitch.setChecked(false);
-            binding.dynamicTileIconSwitch.setEnabled(!state);
-            binding.dynamicTileIconLayout.setEnabled(!state);
-            binding.dynamicTileIconTitle.setAlpha(state ? 0.4f : 1);
-            binding.dynamicTileIconDescription.setAlpha(state ? 0.4f : 1);
-            binding.dynamicTileIconDescription.setText(state ? R.string.bottom_sheet_preferences_tile_state_disabled_reason : R.string.bottom_sheet_preferences_dynamic_tile_icon_description);
-
+        binding.percentageAsTileIconPreference.setOnCheckedChangeListener((self, state) -> {
+            if (binding.percentageAsTileIconPreference.isPressed()) {
+                binding.dynamicTileIconPreference.setChecked(false);
+            }
             preferences.edit().putBoolean("percentage_as_icon", state).apply();
         });
 
-        binding.dynamicTileIconLayout.setOnClickListener(self -> binding.dynamicTileIconSwitch.toggle());
-        binding.dynamicTileIconSwitch.setOnCheckedChangeListener((self, state) -> preferences.edit().putBoolean("dynamic_tile_icon", state).apply());
+        binding.dynamicTileIconPreference.setOnClickListener(self -> binding.dynamicTileIconPreference.toggle());
+        binding.dynamicTileIconPreference.setOnCheckedChangeListener((self, state) -> {
+            if (binding.dynamicTileIconPreference.isPressed()) {
+                binding.percentageAsTileIconPreference.setChecked(false);
+            }
+            preferences.edit().putBoolean("dynamic_tile_icon", state).apply();
+        });
 
         if (preferences.getBoolean("emulatePowerSaveTile", false)) {
-            binding.emulatePowerSaveTilePreferenceSwitch.setChecked(true);
+            binding.emulatePowerSaveTilePreference.setChecked(true);
             forceTappableTile(true);
         }
         else {
-            binding.tappableTileSwitch.setChecked(preferences.getBoolean("tappableTileEnabled", false));
+            binding.tappableTilePreference.setChecked(preferences.getBoolean("tappableTileEnabled", false));
         }
 
         if (preferences.getBoolean("percentage_as_icon", false)) {
-            binding.percentageAsTileIconSwitch.setChecked(true);
-            binding.dynamicTileIconSwitch.setChecked(false);
-            binding.dynamicTileIconSwitch.setEnabled(false);
-            binding.dynamicTileIconLayout.setEnabled(false);
-            binding.dynamicTileIconTitle.setAlpha(0.4f);
-            binding.dynamicTileIconDescription.setAlpha(0.4f);
-            binding.dynamicTileIconDescription.setText(R.string.bottom_sheet_preferences_tile_state_disabled_reason);
+            binding.percentageAsTileIconPreference.setChecked(true);
+            binding.dynamicTileIconPreference.setChecked(false);
         }
 
-        binding.dynamicTileIconSwitch.setChecked(preferences.getBoolean("dynamic_tile_icon", true));
+        binding.dynamicTileIconPreference.setChecked(preferences.getBoolean("dynamic_tile_icon", true));
 
         showDialog = true;
 
-        binding.infoInTitleSwitch.setChecked(preferences.getBoolean("infoInTitle", false));
+        binding.infoInTitlePreference.setChecked(preferences.getBoolean("infoInTitle", false));
 
         binding.tileStateLayout.setOnClickListener(v -> TileStatePickerDialog.show(requireContext(), inflater, this::updateTileStateDescription));
         updateTileStateDescription();
@@ -182,20 +168,18 @@ public class PreferencesBottomSheet extends BottomSheetDialogFragment {
     private void updateTileStateDescription() {
         final SharedPreferences preferences = requireContext().getSharedPreferences("preferences", Context.MODE_PRIVATE);
         if (preferences.getBoolean("emulatePowerSaveTile", false) || preferences.getBoolean("tappableTileEnabled", false)) {
-            binding.tileStateDescription.setText(R.string.bottom_sheet_preferences_tile_state_disabled_reason);
+            binding.tileStateLayout.setDescription(R.string.bottom_sheet_preferences_tile_state_disabled_reason);
             return;
         }
 
         switch (preferences.getInt("tileState", 0)) {
-            case 0 -> binding.tileStateDescription.setText(R.string.tile_state_always_on);
-            case 1 -> binding.tileStateDescription.setText(R.string.tile_state_on_when_charging);
-            case 2 -> binding.tileStateDescription.setText(R.string.tile_state_always_off);
+            case 0 -> binding.tileStateLayout.setDescription(R.string.tile_state_always_on);
+            case 1 -> binding.tileStateLayout.setDescription(R.string.tile_state_on_when_charging);
+            case 2 -> binding.tileStateLayout.setDescription(R.string.tile_state_always_off);
         }
     }
 
     private void setTileStatePreferenceEnabled(boolean enabled) {
-        binding.tileStateTitle.setAlpha(enabled ? 1 : 0.4f);
-        binding.tileStateDescription.setAlpha(enabled ? 1 : 0.4f);
         binding.tileStateLayout.setEnabled(enabled);
         updateTileStateDescription();
     }

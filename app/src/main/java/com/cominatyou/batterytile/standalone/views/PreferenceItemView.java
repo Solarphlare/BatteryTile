@@ -45,13 +45,13 @@ public class PreferenceItemView extends LinearLayout {
         descriptionView = binding.preferenceItemDescription;
 
         if (attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PreferenceItemView);
-            String title = a.getString(R.styleable.PreferenceItemView_preferenceTitle);
-            String description = a.getString(R.styleable.PreferenceItemView_preferenceDescription);
-            a.recycle();
+            try (final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PreferenceItemView)) {
+                String title = a.getString(R.styleable.PreferenceItemView_preferenceTitle);
+                String description = a.getString(R.styleable.PreferenceItemView_preferenceDescription);
 
-            if (title != null) titleView.setText(title);
-            if (description != null) descriptionView.setText(description);
+                if (title != null) titleView.setText(title);
+                if (description != null) descriptionView.setText(description);
+            }
         }
     }
 

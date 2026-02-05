@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingVertical="14dp">
+        android:paddingVertical="15dp">
 
         <TextView
             android:id="@+id/preference_item_title"

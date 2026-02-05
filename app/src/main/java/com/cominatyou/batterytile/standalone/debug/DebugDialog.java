@@ -34,10 +34,10 @@ public class DebugDialog {
 
         final AlertDialog dialog = dialogBuilder.show();
         dialog.setOwnerActivity(activity);
-        ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(activity, R.font.gs_flex));
+        ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(activity, R.font.gs_text));
         @SuppressLint("DiscouragedApi") int resId = activity.getResources().getIdentifier("alertTitle", "id", activity.getPackageName());
         ((TextView) Objects.requireNonNull(dialog.findViewById(resId))).setTypeface(ResourcesCompat.getFont(activity, R.font.gs_flex));
-        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(activity, R.font.gs_flex_medium));
+        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(activity, R.font.gs_text_medium));
 
 
         executorService.submit(() -> new DebugInfoCollector().collectDebugInfo(activity, dialog, executorService));

@@ -81,11 +81,11 @@ public class EditTileTextActivity extends AppCompatActivity {
                     .setPositiveButton(R.string.activity_edit_text_discard_dialog_positive_button, (dialog, which) -> dialog.dismiss());
 
             final AlertDialog dialog = builder.show();
-            ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex));
+            ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_text));
             @SuppressLint("DiscouragedApi") int resId = getResources().getIdentifier("alertTitle", "id", getPackageName());
             ((TextView) Objects.requireNonNull(dialog.findViewById(resId))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex));
-            ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex_medium));
-            ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_flex_medium));
+            ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_text_medium));
+            ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(this, R.font.gs_text_medium));
 
         }
         else {

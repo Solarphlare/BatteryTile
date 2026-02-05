@@ -37,11 +37,9 @@ public class AdbDialog {
                 });
 
         final AlertDialog dialog = builder.show();
-        ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex));
-        @SuppressLint("DiscouragedApi") int resId = context.getResources().getIdentifier("alertTitle", "id", context.getPackageName());
-        ((TextView) Objects.requireNonNull(dialog.findViewById(resId))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex));
+        ((TextView) Objects.requireNonNull(dialog.findViewById(android.R.id.message))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_text));
         ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button3))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex_medium));
-        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex_medium));
-        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_flex_medium));
+        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button2))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_text_medium));
+        ((Button) Objects.requireNonNull(dialog.findViewById(android.R.id.button1))).setTypeface(ResourcesCompat.getFont(context, R.font.gs_text_medium));
     }
 }

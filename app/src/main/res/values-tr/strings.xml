@@ -60,16 +60,17 @@
     <string name="menu_edit_title_save_button">Kaydet</string>
     <string name="bottom_sheet_preferences_dynamic_tile_icon_title">Dinamik kutucuk simgesi</string>
     <string name="bottom_sheet_preferences_dynamic_tile_icon_description">Şarj ederken kutucuk simgesinde güç kaynağını görüntüle</string>
-    <!--  These need to be translated. Any help would be appreciated!  -->
-    <string name="bottom_sheet_preferences_percentage_as_tile_icon_title">Battery percentage as tile icon</string>
-    <string name="bottom_sheet_preferences_percentage_as_tile_icon_description">Display the current battery percentage as the tile icon</string>
     <string name="requires_adb_dialog_copy_success">ADB komutu kopyalandı!</string>
     <string name="requires_adb_dialog_copy_button">ADB komutunu kopyala</string>
     <!--  These need to be translated. Any help would be appreciated!  -->
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_title">Battery percentage as tile icon</string>
+    <string name="bottom_sheet_preferences_percentage_as_tile_icon_description">Display the current battery percentage as the tile icon</string>
     <string name="debug_dialog_title">"Collecting Debug Info"</string>
     <string name="debug_dialog_initial_description">This won\'t take very long.</string>
     <string name="debug_dialog_collecting_info_description">Collecting battery info… (pass %1$d)</string>
     <string name="debug_dialog_connect_to_power_description">Please connect your device to power to continue.</string>
     <string name="debug_dialog_disconnect_from_power_description">Please disconnect your device from power to continue.</string>
     <string name="debug_dialog_failed_to_save_report_toast">Failed to save report</string>
+    <string name="preferences_bottom_sheet_update_available_title">Update Available</string>
+    <string name="preferences_bottom_sheet_update_available_description">A new version of Battery Tile is available. Tap to download.</string>
 </resources>

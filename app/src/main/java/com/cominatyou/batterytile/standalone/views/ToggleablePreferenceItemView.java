@@ -3,10 +3,12 @@ package com.cominatyou.batterytile.standalone.views;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.cominatyou.batterytile.standalone.R;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 public class ToggleablePreferenceItemView extends PreferenceItemView {
@@ -29,11 +31,9 @@ public class ToggleablePreferenceItemView extends PreferenceItemView {
         super.init(context, attrs);
 
         switchView = new MaterialSwitch(context);
-        addView(switchView);
+        ((LinearLayout) findViewById(R.id.preference_item_view_container)).addView(switchView);
 
-        setOnClickListener(v -> {
-            switchView.toggle();
-        });
+        setOnClickListener(v -> switchView.toggle());
     }
 
     /**

@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingHorizontal="16dp"
+        android:id="@+id/bottom_sheet_preferences_main_layout"
         app:layout_behavior="@string/bottom_sheet_behavior">
 
         <TextView
@@ -35,16 +36,15 @@
             android:text="@string/preferences_bottom_sheet_title"
             android:textColor="?android:textColorPrimary"
             android:textSize="28sp"
+            android:layout_marginBottom="18dp"
             android:typeface="normal" />
 
         <com.cominatyou.batterytile.standalone.views.ToggleablePreferenceItemView
             android:id="@+id/emulate_power_save_tile_preference"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
             android:background="@drawable/list_item_background_top"
             android:clickable="true"
-            android:paddingHorizontal="16dp"
             app:preferenceDescription="@string/emulate_power_save_tile_preference_description"
             app:preferenceTitle="@string/emulate_power_save_tile_preference_title" />
 
@@ -55,7 +55,6 @@
             android:layout_marginTop="2dp"
             android:background="@drawable/list_item_background_middle"
             android:clickable="true"
-            android:paddingHorizontal="16dp"
             app:preferenceDescription="@string/enable_tap_action_preference_description"
             app:preferenceTitle="@string/enable_tap_action_preference_title" />
 
@@ -66,7 +65,6 @@
             android:layout_marginTop="2dp"
             android:background="@drawable/list_item_background_middle"
             android:clickable="true"
-            android:paddingHorizontal="16dp"
             app:preferenceDescription="@string/info_in_title_option_description"
             app:preferenceTitle="@string/info_in_title_option_title" />
 
@@ -78,7 +76,6 @@
             android:background="@drawable/list_item_background_middle"
             android:clickable="true"
             android:focusable="true"
-            android:paddingHorizontal="16dp"
             app:preferenceDescription="@string/bottom_sheet_preferences_percentage_as_tile_icon_description"
             app:preferenceTitle="@string/bottom_sheet_preferences_percentage_as_tile_icon_title" />
 
@@ -90,7 +87,6 @@
             android:background="@drawable/list_item_background_middle"
             android:clickable="true"
             android:focusable="true"
-            android:paddingHorizontal="16dp"
             app:preferenceDescription="@string/bottom_sheet_preferences_dynamic_tile_icon_description"
             app:preferenceTitle="@string/bottom_sheet_preferences_dynamic_tile_icon_title" />
 
@@ -102,7 +98,6 @@
             android:background="@drawable/list_item_background_middle"
             android:clickable="true"
             android:focusable="true"
-            android:paddingHorizontal="16dp"
             app:preferenceDescription="@string/tile_state_always_on"
             app:preferenceTitle="@string/dialog_customize_tile_state_title" />
 
@@ -114,7 +109,6 @@
             android:background="@drawable/list_item_background_bottom"
             android:clickable="true"
             android:focusable="true"
-            android:paddingHorizontal="16dp"
             app:preferenceDescription="@string/bottom_sheet_preferences_tile_text_description"
             app:preferenceTitle="@string/bottom_sheet_preferences_tile_text_title" />
 
